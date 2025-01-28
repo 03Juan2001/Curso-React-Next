@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Swal from 'sweetalert2'
 
-const Formulario = () => {
+const Formulario = ({ addTodo }) => {
     const [todo, setTodo] = useState({
         title: '',
         description: '',
         state: 'pendiente',
-        priority: true,
+        priority: false,
     })
 
     //Desestructuracion
@@ -14,28 +14,37 @@ const Formulario = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log( title, description, state ); //Trim = Limpieza de caracteres
-        if ( !title.trim()  || !description.trim()) {
-            return Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Titulo y descripcion necesario',
-            })
+        console.log(title, description, state);
+        if (!title.trim() || !description.trim()) {
+            console.log("Datos incompletos");
+            Swal.fire({
+                title: "Error!",
+                text: "Título y descripción son obligatorios",
+                icon: "error",
+            });
+            return;
         }
         addTodo({
             id: Date.now(),
             ...todo,
             state: state === "completado",
         });
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Tarea agregada con éxito",
+            showConfirmButton: false,
+            timer: 1500,
+        });
     };
     
     const handleChange = (e) => {
-        //Desestructuracion
-        const { name, type, checked, value } = e.target
+        const { name, type, checked, value } = e.target;
+
         setTodo({
             ...todo,
-            [name]: type === 'checkbox' ? checked : value,
-        })
+            [name]: type === "checkbox" ? checked : value,
+        });
     };
 
     return (
@@ -58,7 +67,7 @@ const Formulario = () => {
             <div className="form-check">
                 <input 
                     type="checkbox" 
-                    name="pririty" 
+                    name="priority" 
                     className="form-check-input" 
                     id="inputCheck"
                     checked={priority}

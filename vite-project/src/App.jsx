@@ -12,30 +12,34 @@ const initialStateTodos = [
   },
   {
     id: 2,
-    title: 'Todo #01',
-    description: 'Descrpcion #01',
+    title: 'Todo #02',
+    description: 'Descrpcion #02',
     state: false,
     priority: false,
   },
   {
     id: 3,
-    title: 'Todo #01',
-    description: 'Descrpcion #01',
+    title: 'Todo #03',
+    description: 'Descrpcion #03',
     state: false,
     priority: true,
   },
 ]
 
 const App = () => {
-  const [ todos, setTodos ] = useState( initialStateTodos )
+  const [todos, setTodos] = useState(initialStateTodos);
+
+  const addTodo = (todo) => {
+    setTodos([...todos, todo]);
+  };
 
   return (
-    <div className="container mb-2">
-      <h1 className="my-5"> Formularios </h1>
-        <Formulario />
-        <Todos todos = { todos } /> {/* Props */}
+    <div className="container">
+      <h1>Formularios</h1>
+      <Formulario addTodo={addTodo} />
+      <Todos todos={todos} />
     </div>
-  )
-}
+  );
+};
 
 export default App;

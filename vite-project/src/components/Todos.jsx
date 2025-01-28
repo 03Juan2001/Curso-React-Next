@@ -1,16 +1,19 @@
-import React from 'react'
+import Todo from "./Todo";
 
 const Todos = ({ todos }) => {
   return (
-    <div className='mt-5'>
-        <h2 className='text-center'>Todos</h2>
-        <ul>
-            { todos.map(( todos ) => (
-                <li key={ todos.id }> { todos.title } </li>
-            ))}
-        </ul>
-    </div>
-  )
-}
+    <main>
+      <h2 className="text-center my-5">Todos</h2>
+      <ul className="list-group">
+        {todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+          />
+        ))}
+      </ul>
+    </main>
+  );
+};
 
-export default Todos
+export default Todos;
