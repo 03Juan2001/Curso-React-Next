@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from 'sweetalert2'
 
 const Formulario = () => {
     const [todo, setTodo] = useState({
@@ -13,10 +14,13 @@ const Formulario = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(title, description, state);
-        if (!title.trim() || !description.trim()) {
-            console.log("Datos incompletos");
-            return;
+        console.log( title, description, state ); //Trim = Limpieza de caracteres
+        if ( !title.trim()  || !description.trim()) {
+            return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Titulo y descripcion necesario',
+            })
         }
         addTodo({
             id: Date.now(),
@@ -72,7 +76,7 @@ const Formulario = () => {
                 <option value="completado"> Completado </option>
             </select>
             <button type="submit" className="btn btn-primary">
-                Procesar
+                Agregar Todo
             </button>
         </form>
     )

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import  Formulario  from "./components/Formulario";
-import Cats from "./components/cats";
+import Todos from "./components/Todos";
 
-const initialStatetodos = [
+const initialStateTodos = [
   {
     id: 1,
     title: 'Todo #01',
@@ -27,12 +27,13 @@ const initialStatetodos = [
 ]
 
 const App = () => {
-  const [todos, setTodos] = useState([])
+  const [ todos, setTodos ] = useState( initialStateTodos )
 
   return (
-    <div>
-      <h1>Formularios </h1>
+    <div className="container mb-2">
+      <h1 className="my-5"> Formularios </h1>
         <Formulario />
+        <Todos todos = { todos } /> {/* Props */}
     </div>
   )
 }
